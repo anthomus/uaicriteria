@@ -51,7 +51,9 @@ public class BasicCriteriaElements<T> {
     }
 
     public BaseCriteria<T> getBaseCriteriaForSubQuery() {
-        return regularCriteria;
+        if (regularCriteria != null) return regularCriteria;
+        if (multiselectCriteria != null) return multiselectCriteria;
+        throw new IllegalStateException("Base Criteria for subquery not found");
     }
 
     public TypedQuery<Long> getCountQuery() {

@@ -32,9 +32,18 @@ public class AbstractPathCreator {
         return baseCriteria.getCriteriaBuilder().and(equal);
     }
 
+    static Predicate createOrPredicate(final BaseCriteria baseCriteria, final Predicate... equal) {
+        return baseCriteria.getCriteriaBuilder().or(equal);
+    }
+
     static void finishWithAndPredicate(final BaseCriteria baseCriteria, final Predicate... currentPredicate) {
         final Predicate andPredicate = createAndPredicate(baseCriteria, currentPredicate);
         baseCriteria.addAndPredicate(andPredicate);
+    }
+
+    static void finishWithOrPredicate(int index, final BaseCriteria baseCriteria, final Predicate... currentPredicate) {
+        final Predicate andPredicate = createOrPredicate(baseCriteria, currentPredicate);
+        baseCriteria.addOrPredicate(index, andPredicate);
     }
 
     static Comparable getTypedValue(final Class entityClass, final String attributeName, final Object value) {

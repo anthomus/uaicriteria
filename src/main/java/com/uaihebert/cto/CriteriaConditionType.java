@@ -74,7 +74,7 @@ public enum CriteriaConditionType {
             uaiCriteria.orNotEquals(holder.attributeName, holder.getValueArray());
         }
     },
-    AND_GREATER_THAN {
+    GREATER_THAN {
         @Override
         public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
             if (holder.toLowerCase) {
@@ -92,7 +92,6 @@ public enum CriteriaConditionType {
                 uaiCriteria.orGreaterThan(holder.toLowerCase, holder.attributeName, holder.getValueAsString());
                 return;
             }
-
             uaiCriteria.orGreaterThan(holder.attributeName, holder.getValue());
         }
     },
@@ -118,6 +117,41 @@ public enum CriteriaConditionType {
             uaiCriteria.andGreaterOrEqualTo(holder.attributeName, holder.getValue());
         }
     },
+    OR_GREATER_OR_EQUAL_TO {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            if (holder.toLowerCase) {
+                uaiCriteria.orGreaterOrEqualTo(holder.toLowerCase, holder.attributeName, holder.getValueAsString());
+                return;
+            }
+
+            uaiCriteria.orGreaterOrEqualTo(holder.attributeName, holder.getValue());
+        }
+    },
+    OR_LESS_THAN {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            if (holder.toLowerCase) {
+                uaiCriteria.orLessThan(holder.toLowerCase, holder.attributeName, holder.getValueAsString());
+                return;
+            }
+
+            uaiCriteria.orLessThan(holder.attributeName, holder.getValue());
+        }
+    },
+
+    OR_LESS_OR_EQUAL_TO {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            if (holder.toLowerCase) {
+                uaiCriteria.orLessOrEqualTo(holder.toLowerCase, holder.attributeName, holder.getValueAsString());
+                return;
+            }
+
+            uaiCriteria.orLessOrEqualTo(holder.attributeName, holder.getValue());
+        }
+    },
+
     LESS_OR_EQUAL_TO {
         @Override
         public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
@@ -149,12 +183,25 @@ public enum CriteriaConditionType {
             uaiCriteria.andAttributeIn(holder.attributeName, holder.getValueAsList());
         }
     },
+    OR_ATTRIBUTE_IN {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            uaiCriteria.orAttributeIn(holder.attributeName, holder.getValueAsList());
+        }
+    },
     AND_ATTRIBUTE_NOT_IN {
         @Override
         public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
             uaiCriteria.andAttributeNotIn(holder.attributeName, holder.getValueAsList());
         }
     },
+    OR_ATTRIBUTE_NOT_IN {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            uaiCriteria.orAttributeNotIn(holder.attributeName, holder.getValueAsList());
+        }
+    },
+
     AND_IS_NULL {
         @Override
         public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {

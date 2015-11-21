@@ -132,12 +132,52 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(int index, String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, int index, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
     public UaiCriteria<T> andGreaterOrEqualTo(final String attributeName, final Object value) {
         return null;
     }
 
     @Override
     public UaiCriteria<T> andGreaterOrEqualTo(final boolean toLowerCase, final String attributeName, final String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(boolean toLowerCase, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(int index, String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(boolean toLowerCase, int index, String attributeName, String value) {
         return null;
     }
 
@@ -152,12 +192,52 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public UaiCriteria<T> orLessThan(String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(boolean toLowerCase, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(int index, String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(boolean toLowerCase, int index, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
     public UaiCriteria<T> andLessOrEqualTo(final String attributeName, final Object value) {
         return null;
     }
 
     @Override
     public UaiCriteria<T> andLessOrEqualTo(final boolean toLowerCase, final String attributeName, final String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(boolean toLowerCase, String attributeName, String value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(int index, String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(boolean toLowerCase, int index, String attributeName, String value) {
         return null;
     }
 
@@ -242,12 +322,52 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public <E> UaiCriteria<T> orAttributeIn(String attributeName, List<E> attributeList) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(String attributeName, UaiCriteria<E> uaiSubQuery) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(int index, String attributeName, List<E> attributeList) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(int index, String attributeName, UaiCriteria<E> uaiSubQuery) {
+        return null;
+    }
+
+    @Override
     public <E> UaiCriteria<T> andAttributeNotIn(final String attributeName, final List<E> attributeList) {
         return null;
     }
 
     @Override
     public <E> UaiCriteria<T> andAttributeNotIn(final String attributeName, final UaiCriteria<E> uaiSubQuery) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(String attributeName, List<E> attributeList) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(int index, String attributeName, List<E> attributeList) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(String attributeName, UaiCriteria<E> uaiSubQuery) {
+        return null;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(int index, String attributeName, UaiCriteria<E> uaiSubQuery) {
         return null;
     }
 
@@ -428,16 +548,6 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
 
     @Override
     public UaiCriteria<T> orIsNotNull(final String attributeName) {
-        return null;
-    }
-
-    @Override
-    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
-        return null;
-    }
-
-    @Override
-    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
         return null;
     }
 }

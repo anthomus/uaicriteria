@@ -199,6 +199,30 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
+        criteriaCreator.orGreaterThan(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
+        criteriaCreator.orGreaterThan(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(int index, String attributeName, Object value) {
+        criteriaCreator.orGreaterThan(DO_NOT_APPLY_LOWER_CASE, index, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, int index, String attributeName, String value) {
+        criteriaCreator.orGreaterThan(toLowerCase, index, attributeName, value);
+        return this;
+    }
+
+    @Override
     public UaiCriteria<T> andGreaterOrEqualTo(final String attributeName, final Object value) {
         criteriaCreator.andGreaterOrEqualTo(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
         return this;
@@ -211,6 +235,30 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(String attributeName, Object value) {
+        criteriaCreator.orGreaterOrEqualTo(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(boolean toLowerCase, String attributeName, String value) {
+        criteriaCreator.orGreaterOrEqualTo(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(int index, String attributeName, Object value) {
+        criteriaCreator.orGreaterOrEqualTo(DO_NOT_APPLY_LOWER_CASE, index, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterOrEqualTo(boolean toLowerCase, int index, String attributeName, String value) {
+        criteriaCreator.orGreaterOrEqualTo(toLowerCase, index, attributeName, value);
+        return this;
+    }
+
+    @Override
     public UaiCriteria<T> andLessThan(final String attributeName, final Object value) {
         criteriaCreator.andLessThan(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
         return this;
@@ -219,6 +267,54 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     @Override
     public UaiCriteria<T> andLessThan(final boolean toLowerCase, final String attributeName, final String value) {
         criteriaCreator.andLessThan(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(String attributeName, Object value) {
+        criteriaCreator.orLessThan(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(boolean toLowerCase, String attributeName, String value) {
+        criteriaCreator.orLessThan(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(int index, String attributeName, Object value) {
+        criteriaCreator.orLessThan(DO_NOT_APPLY_LOWER_CASE, index, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessThan(boolean toLowerCase, int index, String attributeName, String value) {
+        criteriaCreator.orLessThan(toLowerCase, index, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(String attributeName, Object value) {
+        criteriaCreator.orLessOrEqualTo(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(boolean toLowerCase, String attributeName, String value) {
+        criteriaCreator.orLessOrEqualTo(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(int index, String attributeName, Object value) {
+        criteriaCreator.orLessOrEqualTo(DO_NOT_APPLY_LOWER_CASE, index, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orLessOrEqualTo(boolean toLowerCase, int index, String attributeName, String value) {
+        criteriaCreator.orLessOrEqualTo(toLowerCase, index, attributeName, value);
         return this;
     }
 
@@ -301,18 +397,6 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
-        criteriaCreator.orGreaterThan(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
-        return this;
-    }
-
-    @Override
-    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
-        criteriaCreator.orGreaterThan(toLowerCase, attributeName, value);
-        return this;
-    }
-
-    @Override
     public UaiCriteria<T> andCollectionIsEmpty(final String collectionName) {
         if (basicCriteriaElements.isBatooProvider()) {
             LOG.warning(IS_EMPTY_BATOO_MESSAGE);
@@ -379,6 +463,38 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public <E> UaiCriteria<T> orAttributeIn(final String attributeName, final List<E> attributeList) {
+        criteriaCreator.orAttributeIn(attributeName, attributeList);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(final String attributeName, final UaiCriteria<E> uaiSubQuery) {
+        if (!(uaiSubQuery instanceof SubQueryImp)) {
+            throw new IllegalArgumentException("This is not an acceptable implementation of uaiSubQuery type. \n Are you sure that you passed the correct attribute here?");
+        }
+
+        criteriaCreator.orAttributeIn(attributeName, (SubQueryImp) uaiSubQuery);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(int index, final String attributeName, final List<E> attributeList) {
+        criteriaCreator.orAttributeIn(index, attributeName, attributeList);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeIn(int index, final String attributeName, final UaiCriteria<E> uaiSubQuery) {
+        if (!(uaiSubQuery instanceof SubQueryImp)) {
+            throw new IllegalArgumentException("This is not an acceptable implementation of uaiSubQuery type. \n Are you sure that you passed the correct attribute here?");
+        }
+
+        criteriaCreator.orAttributeIn(index, attributeName, (SubQueryImp) uaiSubQuery);
+        return this;
+    }
+
+    @Override
     public <E> UaiCriteria<T> andAttributeNotIn(final String attributeName, final List<E> attributeList) {
         criteriaCreator.andAttributeNotIn(attributeName, attributeList);
         return this;
@@ -393,6 +509,39 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
         criteriaCreator.andAttributeNotIn(attributeName, (SubQueryImp) uaiSubQuery);
         return this;
     }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(final String attributeName, final List<E> attributeList) {
+        criteriaCreator.orAttributeNotIn(attributeName, attributeList);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(final String attributeName, final UaiCriteria<E> uaiSubQuery) {
+        if (!(uaiSubQuery instanceof SubQueryImp)) {
+            throw new IllegalArgumentException("This is not an acceptable implementation of uaiSubQuery type. \n Are you sure that you passed the correct attribute here?");
+        }
+
+        criteriaCreator.orAttributeNotIn(attributeName, (SubQueryImp) uaiSubQuery);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(int index, final String attributeName, final List<E> attributeList) {
+        criteriaCreator.orAttributeNotIn(index, attributeName, attributeList);
+        return this;
+    }
+
+    @Override
+    public <E> UaiCriteria<T> orAttributeNotIn(int index, final String attributeName, final UaiCriteria<E> uaiSubQuery) {
+        if (!(uaiSubQuery instanceof SubQueryImp)) {
+            throw new IllegalArgumentException("This is not an acceptable implementation of uaiSubQuery type. \n Are you sure that you passed the correct attribute here?");
+        }
+
+        criteriaCreator.orAttributeNotIn(index, attributeName, (SubQueryImp) uaiSubQuery);
+        return this;
+    }
+
 
     @Override
     public UaiCriteria<T> andStringIn(final String attributeName, final List<String> values) {

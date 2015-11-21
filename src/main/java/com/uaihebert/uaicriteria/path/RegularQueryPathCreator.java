@@ -93,15 +93,14 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         }
 
         for (final Object value : valueArray) {
-            final Comparable typedGreaterThan = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
-            final Predicate predicate = createEqualForOr(toLowerCase, baseCriteria, path, typedGreaterThan, orType);
+            final Predicate predicate = createEqualForOr(toLowerCase, baseCriteria, path, value, orType);
             final Predicate andPredicate = createAndPredicate(baseCriteria, predicate);
 
             baseCriteria.addOrPredicate(index, andPredicate);
         }
     }
 
-    private static Predicate createEqualForOr(final boolean toLowerCase, final BaseCriteria baseCriteria, final Path path, final Comparable value, final CriteriaOrType orType) {
+    private static Predicate createEqualForOr(final boolean toLowerCase, final BaseCriteria baseCriteria, final Path path, final Object value, final CriteriaOrType orType) {
         if (CriteriaOrType.LIKE.equals(orType)) {
             return RegularQueryPredicateCreator.createLikePredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value.toString());
         }
@@ -118,10 +117,6 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         if (CriteriaOrType.IS_NOT_NULL.equals(orType)) {
             final Predicate isNullPredicate = RegularQueryPredicateCreator.createIsNullPredicate(baseCriteria.getCriteriaBuilder(), path);
             return isNullPredicate.not();
-        }
-
-        if (CriteriaOrType.GREATER_THAN.equals(orType)) {
-            return RegularQueryPredicateCreator.createGreaterThanPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value);
         }
 
         return RegularQueryPredicateCreator.createEqualPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value);
@@ -203,13 +198,40 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         finishWithAndPredicate(baseCriteria, equalPredicate);
     }
 
-    public static void orGreaterThan(final boolean toLowerCase, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
+    public static void orGreaterThan(final boolean toLowerCase, int index, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
         final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
         final Predicate equalPredicate = RegularQueryPredicateCreator.createGreaterThanPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, typedValue);
 
-        finishWithAndPredicate(baseCriteria, equalPredicate);
+        finishWithOrPredicate(index, baseCriteria, equalPredicate);
+    }
+
+    public static void orGreaterOrEqualTo(final boolean toLowerCase, int index, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
+        final Predicate equalPredicate = RegularQueryPredicateCreator.createGreaterOrEqualToPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, typedValue);
+
+        finishWithOrPredicate(index, baseCriteria, equalPredicate);
+    }
+
+    public static void orLessThan(final boolean toLowerCase, int index, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
+        final Predicate equalPredicate = RegularQueryPredicateCreator.createLessThanPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, typedValue);
+
+        finishWithOrPredicate(index, baseCriteria, equalPredicate);
+    }
+
+    public static void orLessOrEqualTo(final boolean toLowerCase, int index, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
+        final Predicate equalPredicate = RegularQueryPredicateCreator.createLessOrEqualToPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, typedValue);
+
+        finishWithOrPredicate(index, baseCriteria, equalPredicate);
     }
 
     public static void orNotEquals(final boolean toLowerCase, final BaseCriteria baseCriteria, final String attributeName, final Object[] valueArray) {
@@ -332,4 +354,38 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
 
         finishWithAndPredicate(baseCriteria, notInPredicate);
     }
+
+    public static <E> void orAttributeIn(int index, final BaseCriteria baseCriteria, final String attributeName, final List<E> attributeList) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Predicate inPredicate = RegularQueryPredicateCreator.createAttributeInPredicate(path, attributeList);
+
+        finishWithOrPredicate(index, baseCriteria, inPredicate);
+    }
+
+    public static void orAttributeIn(int index, final BaseCriteria baseCriteria, final String attributeName, final SubQueryImp uaiSubQuery) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Predicate inPredicate = RegularQueryPredicateCreator.createAttributeInPredicate(baseCriteria.getCriteriaBuilder(), path, uaiSubQuery);
+
+        finishWithOrPredicate(index, baseCriteria, inPredicate);
+    }
+
+    public static void orAttributeNotIn(int index, final BaseCriteria baseCriteria, final String attributeName, final SubQueryImp uaiSubQuery) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Predicate inPredicate = RegularQueryPredicateCreator.createAttributeInPredicate(baseCriteria.getCriteriaBuilder(), path, uaiSubQuery);
+
+        finishWithOrPredicate(index, baseCriteria, inPredicate);
+    }
+
+    public static <E> void orAttributeNotIn(int index, final BaseCriteria baseCriteria, final String attributeName, final List<E> attributeList) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Predicate inPredicate = RegularQueryPredicateCreator.createAttributeInPredicate(path, attributeList);
+        final Predicate notInPredicate = inPredicate.not();
+
+        finishWithOrPredicate(index, baseCriteria, notInPredicate);
+    }
+
 }

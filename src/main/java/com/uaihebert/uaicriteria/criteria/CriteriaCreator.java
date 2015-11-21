@@ -196,6 +196,54 @@ public class CriteriaCreator {
         }
     }
 
+    public void orGreaterThan(boolean toLowerCase, String attributeName, Object value) {
+        orGreaterThan(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, value);
+    }
+
+    public void orGreaterThan(boolean toLowerCase, int index, String attributeName, Object value) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orGreaterThan(toLowerCase, index, baseCriteria, attributeName, value);
+        }
+    }
+
+    public void orGreaterOrEqualTo(boolean toLowerCase, String attributeName, Object value) {
+        orGreaterOrEqualTo(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, value);
+    }
+
+    public void orGreaterOrEqualTo(boolean toLowerCase, int index, String attributeName, Object value) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orGreaterOrEqualTo(toLowerCase, index, baseCriteria, attributeName, value);
+        }
+    }
+
+    public void orLessThan(boolean toLowerCase, String attributeName, Object value) {
+        orLessThan(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, value);
+    }
+
+    public void orLessThan(boolean toLowerCase, int index, String attributeName, Object value) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orLessThan(toLowerCase, index, baseCriteria, attributeName, value);
+        }
+    }
+
+    public void orLessOrEqualTo(boolean toLowerCase, String attributeName, Object value) {
+        orLessOrEqualTo(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, value);
+    }
+
+    public void orLessOrEqualTo(boolean toLowerCase, int index, String attributeName, Object value) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orLessOrEqualTo(toLowerCase, index, baseCriteria, attributeName, value);
+        }
+    }
+
     public void orNotEquals(final boolean toLowerCase, final String attributeName, final Object[] valueArray) {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
@@ -300,6 +348,30 @@ public class CriteriaCreator {
         }
     }
 
+    public <E> void orAttributeIn(final String attributeName, final List<E> attributeList) {
+        orAttributeIn(BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, attributeList);
+    }
+
+    public <E> void orAttributeIn(int index, final String attributeName, final List<E> attributeList) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orAttributeIn(index, baseCriteria, attributeName, attributeList);
+        }
+    }
+
+    public void orAttributeIn(final String attributeName, final SubQueryImp uaiSubQuery) {
+        orAttributeIn(BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, uaiSubQuery);
+    }
+
+    public void orAttributeIn(int index, final String attributeName, final SubQueryImp uaiSubQuery) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orAttributeIn(index, baseCriteria, attributeName, uaiSubQuery);
+        }
+    }
+
     public void andAttributeNotIn(final String attributeName, final SubQueryImp uaiSubQuery) {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
@@ -313,6 +385,30 @@ public class CriteriaCreator {
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
             RegularQueryPathCreator.andAttributeNotIn(baseCriteria, attributeName, attributeList);
+        }
+    }
+
+    public void orAttributeNotIn(final String attributeName, final SubQueryImp uaiSubQuery) {
+        orAttributeNotIn(BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, uaiSubQuery);
+    }
+
+    public void orAttributeNotIn(int index, final String attributeName, final SubQueryImp uaiSubQuery) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orAttributeNotIn(index, baseCriteria, attributeName, uaiSubQuery);
+        }
+    }
+
+    public <E> void orAttributeNotIn(final String attributeName, final List<E> attributeList) {
+        orAttributeNotIn(BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, attributeName, attributeList);
+    }
+
+    public <E> void orAttributeNotIn(int index, final String attributeName, final List<E> attributeList) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.orAttributeNotIn(index, baseCriteria, attributeName, attributeList);
         }
     }
 
@@ -473,14 +569,6 @@ public class CriteriaCreator {
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
             MultiSelectQueryPathCreator.countAttribute(baseCriteria, attributeArray);
-        }
-    }
-
-    public void orGreaterThan(boolean toLowerCase, String attributeName, Object value) {
-        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
-
-        for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            RegularQueryPathCreator.addOr(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, baseCriteria, attributeName, new Object[]{value}, CriteriaOrType.GREATER_THAN);
         }
     }
 }
