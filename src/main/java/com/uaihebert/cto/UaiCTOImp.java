@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+
 public final class UaiCTOImp<T> implements UaiCriteria<T> {
     private static final boolean DO_NOT_APPLY_LOWER_CASE = false;
 
@@ -636,4 +639,34 @@ public final class UaiCTOImp<T> implements UaiCriteria<T> {
     Integer getMaxResults() {
         return maxResults;
     }
+
+	@Override
+	public Path getPath(String attributeName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UaiCriteria<T> andWhere(Predicate where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UaiCriteria<T> orWhere(Predicate where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate notEquals(String attribute1, String attribute2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate equals(String attribute1, String attribute2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

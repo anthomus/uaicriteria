@@ -19,6 +19,9 @@ import com.uaihebert.uaicriteria.UaiCriteria;
 
 import java.util.List;
 
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+
 public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
 
     @Override
@@ -550,4 +553,34 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     public UaiCriteria<T> orIsNotNull(final String attributeName) {
         return null;
     }
+
+	@Override
+	public Path getPath(String attributeName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UaiCriteria<T> andWhere(Predicate where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UaiCriteria<T> orWhere(Predicate where) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate notEquals(String attribute1, String attribute2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Predicate equals(String attribute1, String attribute2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
