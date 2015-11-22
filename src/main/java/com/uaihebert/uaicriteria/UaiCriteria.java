@@ -17,6 +17,9 @@ package com.uaihebert.uaicriteria;
 
 import java.util.List;
 
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+
 /**
  * With a implementation of this interface you will be able to execute JPA criteria actions
  *
@@ -125,6 +128,7 @@ public interface UaiCriteria<T> {
      * @throws IllegalArgumentException if the value is not String an exception will be thrown
      */
     public UaiCriteria<T> andEquals(final boolean toLowerCase, final String attributeName, final String value);
+    
 
     /**
      * Method that uses the "OR" of the JPQL. A JPQL like br.com.m4u.csu.rest.api.model might be created: <br/><br/>
@@ -1344,4 +1348,18 @@ public interface UaiCriteria<T> {
      * @return the current UaiCriteria instance
      */
     public UaiCriteria<T> groupBy(final String... attributeNameArray);
+    
+    //public UaiCriteria<T> and(final String attributeName1, final String attributeName2);
+    //public UaiCriteria<T> or(final String expression);
+    
+    public Path getPath(final String attributeName);
+    
+    public UaiCriteria<T> andWhere(final Predicate where);
+    public UaiCriteria<T> orWhere(final Predicate where);
+
+	public Predicate notEquals(String attribute1, String attribute2);
+	public Predicate equals(String attribute1, String attribute2);
+	
+    
+    
 }

@@ -15,13 +15,18 @@
  * */
 package com.uaihebert.uaicriteria.criteria;
 
+import com.uaihebert.uaicriteria.UaiCriteria;
 import com.uaihebert.uaicriteria.base.element.BaseCriteria;
 import com.uaihebert.uaicriteria.base.element.BasicCriteriaElements;
 import com.uaihebert.uaicriteria.path.MultiSelectQueryPathCreator;
+import com.uaihebert.uaicriteria.path.PathHelper;
 import com.uaihebert.uaicriteria.path.RegularQueryPathCreator;
 import com.uaihebert.uaicriteria.subquery.SubQueryImp;
 
 import java.util.List;
+
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 
 public class CriteriaCreator {
     private static final boolean DO_NOT_USE_LOWER_CASE = false;
@@ -571,4 +576,58 @@ public class CriteriaCreator {
             MultiSelectQueryPathCreator.countAttribute(baseCriteria, attributeArray);
         }
     }
+
+	public void and(String attributeName1, String attributeName2) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            MultiSelectQueryPathCreator.and(baseCriteria, attributeName1, attributeName2);
+        }		
+	}
+
+	public Path getPath(String attributeName) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+        	Path path = PathHelper.extractPath(baseCriteria, attributeName);
+        	if(path != null) return path;
+        }
+        return null;
+	}
+
+	public void andWhere(Predicate where) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            MultiSelectQueryPathCreator.andWhere(baseCriteria, where);
+        }		
+	}
+	
+	public void orWhere(Predicate where) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            MultiSelectQueryPathCreator.orWhere(baseCriteria, where);
+        }		
+	}
+
+	public Predicate notEquals(String attribute1, String attribute2) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+        	Predicate p = MultiSelectQueryPathCreator.notEquals(baseCriteria, attribute1, attribute2);
+        	if(p != null) return p;
+        }		
+        return null;
+	}
+	
+	public Predicate equals(String attribute1, String attribute2) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+        	Predicate p = MultiSelectQueryPathCreator.equals(baseCriteria, attribute1, attribute2);
+        	if(p != null) return p;
+        }		
+        return null;
+	}
 }

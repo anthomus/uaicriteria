@@ -20,6 +20,7 @@ import com.uaihebert.uaicriteria.predicate.MultiSelectQueryPredicateCreator;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 
 public final class MultiSelectQueryPathCreator {
 
@@ -195,4 +196,44 @@ public final class MultiSelectQueryPathCreator {
             baseCriteria.addMultiSelectOperationExpression(countPredicate);
         }
     }
+
+	public static void and(final BaseCriteria baseCriteria, String attributeName1, String attributeName2) {
+		final Path path1 = PathHelper.extractPath(baseCriteria, attributeName1);
+		final Path path2 = PathHelper.extractPath(baseCriteria, attributeName2);
+		
+		Predicate pair = baseCriteria.getCriteriaBuilder().notEqual(path1, path2);
+		baseCriteria.addAndPredicate(pair);
+	}
+	
+	public static void andWhere(final BaseCriteria baseCriteria, final Predicate where) {
+		
+		baseCriteria.addAndPredicate(where);
+	}
+
+	public static void orWhere(BaseCriteria baseCriteria, Predicate where) {
+		baseCriteria.addOrPredicate(0, where);
+	}
+
+	public static Predicate notEquals(BaseCriteria baseCriteria, String attribute1, String attribute2) {
+		
+		final Path path1 = PathHelper.extractPath(baseCriteria, attribute1);
+		final Path path2 = PathHelper.extractPath(baseCriteria,  attribute2);
+		
+//        Predicate[] restrictions = new Predicate[] {
+//        		baseCriteria.getCriteriaBuilder().notEqual(path1, path2), 
+//        		path1.isNull(), 
+//        		path2.isNull()
+//        };
+//        
+//        Predicate notEquals = baseCriteria.getCriteriaBuilder().or(restrictions);
+		Predicate notEquals = baseCriteria.getCriteriaBuilder().notEqual(path1,path2);
+		return notEquals;
+	}
+
+	public static Predicate equals(BaseCriteria baseCriteria, String attribute1, String attribute2) {
+		final Path path1 = PathHelper.extractPath(baseCriteria, attribute1);
+		final Path path2 = PathHelper.extractPath(baseCriteria,  attribute2);
+		return baseCriteria.getCriteriaBuilder().equal(path1, path2);
+	}
+	
 }

@@ -20,10 +20,14 @@ import com.uaihebert.uaicriteria.base.element.BasicCriteriaElementsFactory;
 import com.uaihebert.uaicriteria.criteria.CriteriaCreator;
 import com.uaihebert.uaicriteria.criteria.CriteriaOrType;
 import com.uaihebert.uaicriteria.criteria.QueryType;
+import com.uaihebert.uaicriteria.path.PathHelper;
 import com.uaihebert.uaicriteria.subquery.SubQueryImp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -179,7 +183,7 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
         criteriaCreator.orNotEquals(DO_NOT_APPLY_LOWER_CASE, attributeName, valueArray);
         return this;
     }
-
+    
     @Override
     public UaiCriteria<T> orNotEquals(final boolean toLowerCase, final String attributeName, final String... valueArray) {
         criteriaCreator.orNotEquals(toLowerCase, attributeName, valueArray);
@@ -720,4 +724,38 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
         criteriaCreator.groupBy(attributeNameArray);
         return this;
     }
+    
+//    @Override
+//    public UaiCriteria<T> and(final String attributeName1, final String attributeName2) {
+//    	criteriaCreator.and(attributeName1, attributeName2);
+//        return this;
+//    }
+    
+    @Override
+    public Path getPath(final String attributeName) {
+    	return criteriaCreator.getPath(attributeName);
+    }
+    
+    @Override
+    public UaiCriteria<T> andWhere(final Predicate where) {
+    	criteriaCreator.andWhere(where);
+    	return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orWhere(final Predicate where) {
+    	criteriaCreator.orWhere(where);
+    	return this;
+    }
+    
+    @Override
+	public Predicate notEquals(String attribute1, String attribute2) {
+    	return criteriaCreator.notEquals(attribute1,attribute2);
+    }
+    
+	public Predicate equals(String attribute1, String attribute2) {
+    	return criteriaCreator.equals(attribute1,attribute2);
+    }
+    
+    
 }
